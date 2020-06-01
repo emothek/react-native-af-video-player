@@ -32,11 +32,16 @@
     {
       "name": "abbasfreestyle",
       "email": "abbasfreestyle@gmail.com"
+    },
+    {
+      "name": "Mokhtar Megherbi",
+      "email": "mokhtar.developer@gmail.com",
+      "url": "https://github.com/emothek"
     }
   ],
   "license": "MIT",
   "author": {
-    "name": "Abbas Farid",
+    "name": "Abbas Farid ",
     "email": "abbasfreestyle@gmail.com",
     "url": "https://github.com/abbasfreestyle"
   }
