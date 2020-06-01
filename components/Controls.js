@@ -68,7 +68,7 @@ class Controls extends Component {
           break
         case this.state.hideControls:
           break
-        case this.state.seconds > this.props.controlDuration:
+        case this.state.seconds > 3:
           this.hideControls()
           break
         default:
@@ -81,21 +81,21 @@ class Controls extends Component {
     this.setState({ hideControls: false }, () => {
       this.progressbar.setValue(2)
       Animated.parallel([
-        Animated.timing(this.animControls, { toValue: 1, duration: 200 }),
-        Animated.timing(this.scale, { toValue: 1, duration: 200 })
-      ]).start()
+        Animated.timing(this.animControls, { toValue: 1, duration: 200 , useNativeDriver: false }),
+        Animated.timing(this.scale, { toValue: 1, duration: 200 , useNativeDriver: false })
+      ], { useNativeDriver: false }).start()
     })
   }
 
   hideControls() {
     Animated.parallel([
-      Animated.timing(this.animControls, { toValue: 0, duration: 200 }),
-      Animated.timing(this.scale, { toValue: 0.25, duration: 200 })
+      Animated.timing(this.animControls, { toValue: 0, duration: 200 , useNativeDriver: false }),
+      Animated.timing(this.scale, { toValue: 0.25, duration: 200 , useNativeDriver: false })
     ]).start(() => this.setState({ hideControls: true, seconds: 0 }))
   }
 
   hiddenControls() {
-    Animated.timing(this.progressbar, { toValue: 0, duration: 200 }).start()
+    Animated.timing(this.progressbar, { toValue: 0, duration: 200 , useNativeDriver: false }).start()
     return (
       <Touchable style={styles.container} onPress={() => this.showControls()}>
         <Animated.View style={[styles.container, { paddingBottom: this.progressbar }]}>
@@ -127,8 +127,7 @@ class Controls extends Component {
       currentTime,
       duration,
       theme,
-      inlineOnly,
-      hideFullScreenControl
+      inlineOnly
     } = this.props
 
     const { center, ...controlBar } = theme
@@ -165,7 +164,6 @@ class Controls extends Component {
             duration={duration}
             theme={controlBar}
             inlineOnly={inlineOnly}
-            hideFullScreenControl={hideFullScreenControl}
           />
         </Animated.View>
       </Touchable>
@@ -190,7 +188,6 @@ Controls.propTypes = {
   onMorePress: PropTypes.func.isRequired,
   paused: PropTypes.bool.isRequired,
   inlineOnly: PropTypes.bool.isRequired,
-  hideFullScreenControl: PropTypes.bool.isRequired,
   fullscreen: PropTypes.bool.isRequired,
   muted: PropTypes.bool.isRequired,
   more: PropTypes.bool.isRequired,
